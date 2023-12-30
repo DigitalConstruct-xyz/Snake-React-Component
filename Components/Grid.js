@@ -2,7 +2,10 @@ import React from 'react';
 import GridCell from './GridCell';
 import checkCollision from "../Helpers/checkCollision";
 
-const Grid = ({ gridSize, snake, food, gridPixelSizeX=20, gridPixelSizeY=20}) => {
+const Grid = ({ gridSize, snake, food,
+                  gridPixelSizeX=20, gridPixelSizeY=20,
+                    gridCellPixelSizeX=15, gridCellPixelSizeY=15,
+                    }) => {
     const renderGrid = () => {
         let grid = [];
 
@@ -11,8 +14,14 @@ const Grid = ({ gridSize, snake, food, gridPixelSizeX=20, gridPixelSizeY=20}) =>
                 let isSnake = checkCollision([j, i], snake);
                 let isFood = food[0] === j && food[1] === i;
                 grid.push(
-                    <GridCell key={`${i}-${j}`} isSnake={isSnake} isFood={isFood} coordinate={[i,j]} />
+                    <GridCell key={`${i}-${j}`} isSnake={isSnake} isFood={isFood} coordinate={[i,j]}
+                        gridCellPixelSizeX={gridCellPixelSizeX} gridCellPixelSizeY={gridCellPixelSizeY
+                    }
+
+
+                    />
                 );
+
             }
         }
 
