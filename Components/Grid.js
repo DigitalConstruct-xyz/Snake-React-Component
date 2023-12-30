@@ -5,6 +5,7 @@ import checkCollision from "../Helpers/checkCollision";
 const Grid = ({ gridSize, snake, food,
                   gridPixelSizeX=20, gridPixelSizeY=20,
                     gridCellPixelSizeX=15, gridCellPixelSizeY=15,
+                        foodColor = 'red', snakeColor = 'green', backgroundColor = 'white'
                     }) => {
     const renderGrid = () => {
         let grid = [];
@@ -16,7 +17,7 @@ const Grid = ({ gridSize, snake, food,
                 grid.push(
                     <GridCell key={`${i}-${j}`} isSnake={isSnake} isFood={isFood} coordinate={[i,j]}
                         gridCellPixelSizeX={gridCellPixelSizeX} gridCellPixelSizeY={gridCellPixelSizeY
-                    }
+                    } backgroundColor={backgroundColor} snakeColor={snakeColor} foodColor={foodColor}
 
 
                     />

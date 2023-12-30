@@ -16,7 +16,10 @@ const SnakeGame = ({
                        gridPixelSizeX = 8,
                        gridPixelSizeY = 8,
                        gridCellPixelSizeX = 6,
-                       gridCellPixelSizeY =6
+                       gridCellPixelSizeY =6,
+                       backgroundColor = 'black',
+                       snakeColor = 'yellow',
+                       foodColor = 'red'
                    }) => {
     const [snake, setSnake] = useState(initialSnake);
     const initialFood = generateFood(initialSnake, gridSize)
@@ -32,11 +35,12 @@ const SnakeGame = ({
     }, msPerFrame);
 
     return <Grid gridSize={gridSize} snake={snake} food={food}
-
-
         gridPixelSizeY={gridPixelSizeY}
             gridCellPixelSizeX={gridCellPixelSizeX} gridCellPixelSizeY={gridCellPixelSizeY}
             gridPixelSizeX={gridPixelSizeX}
+            backgroundColor={backgroundColor}
+            snakeColor={snakeColor}
+            foodColor={foodColor}
     />;
 };
 
