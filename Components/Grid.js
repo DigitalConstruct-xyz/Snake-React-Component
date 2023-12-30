@@ -2,7 +2,7 @@ import React from 'react';
 import GridCell from './GridCell';
 import checkCollision from "../Helpers/checkCollision";
 
-const Grid = ({ gridSize, snake, food}) => {
+const Grid = ({ gridSize, snake, food, gridPixelSizeX=20, gridPixelSizeY=20}) => {
     const renderGrid = () => {
         let grid = [];
 
@@ -19,8 +19,8 @@ const Grid = ({ gridSize, snake, food}) => {
         return (
             <div style={{
                 display: 'grid',
-                gridTemplateColumns: `repeat(${gridSize[0]}, 20px)`,
-                gridTemplateRows: `repeat(${gridSize[1]}, 20px)`,
+                gridTemplateColumns: `repeat(${gridSize[0]}, ${gridPixelSizeX}px)`,
+                gridTemplateRows: `repeat(${gridSize[1]}, ${gridPixelSizeY}px)`,
                 gap: '1px'
             }}>
                 {grid}
