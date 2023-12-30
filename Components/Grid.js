@@ -32,6 +32,7 @@ const Grid = ({ gridSize, snake, food,
                 gridTemplateColumns: `repeat(${gridSize[0]}, ${gridPixelSizeX}px)`,
                 gridTemplateRows: `repeat(${gridSize[1]}, ${gridPixelSizeY}px)`,
                 alignItems: 'center',
+                justifyItems: 'center',
                 justifyContent: 'center',
             }}>
                 {grid}
