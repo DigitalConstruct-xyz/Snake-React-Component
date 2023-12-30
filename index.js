@@ -5,15 +5,12 @@ import useSnakeDirection from './Hooks/useSnakeDirection';
 import gameLoop from "./Game";
 import generateFood from "./Game/generateFood";
 
-const gridSize = [10,5];
 const initialSnake = [[0, 0]];
-// const initialFood = [5, 5];
-const msPerFrame = 600;
 const initialDirection = 'RIGHT';
 
 
 
-const SnakeGame = () => {
+const SnakeGame = ({msPerF: msPerFrame = 600,gridSize = [10, 4]}) => {
     const [snake, setSnake] = useState(initialSnake);
     const initialFood = generateFood(initialSnake, gridSize)
     const [food, setFood] = useState(initialFood);
@@ -25,7 +22,6 @@ const SnakeGame = () => {
             setSnake(initialSnake)
             setDirection(initialDirection)
         });
-
     }, msPerFrame);
 
     return <Grid gridSize={gridSize} snake={snake} food={food} />;
