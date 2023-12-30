@@ -1,6 +1,6 @@
 // useSnakeDirection.js
 import { useState, useEffect } from 'react';
-import handleKeyDown from "../Game/handleKeyDown";
+import handleKeyDown from "../Helpers/handleKeyDown";
 
 const useSnakeDirection = (initialDirection) => {
     const [direction, setDirection] = useState(initialDirection);

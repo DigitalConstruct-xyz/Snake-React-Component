@@ -1,6 +1,6 @@
 import React from 'react';
 import GridCell from './GridCell';
-import checkCollision from "../Game/checkCollision";
+import checkCollision from "../Helpers/checkCollision";
 
 const Grid = ({ gridSize, snake, food}) => {
     const renderGrid = () => {

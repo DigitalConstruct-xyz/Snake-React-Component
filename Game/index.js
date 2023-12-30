@@ -1,8 +1,8 @@
-import checkCollision from "./checkCollision";
-import isSnakeOutOfBounds from "./isSnakeOutOfBounds";
+import checkCollision from "../Helpers/checkCollision";
+import isSnakeOutOfBounds from "../Helpers/isSnakeOutOfBounds";
 import moveSnake from "./moveSnake";
 import generateFood from "./generateFood";
-import checkSnakeOverlap from "./checkSnakeOverlap";
+import checkSnakeOverlap from "../Helpers/checkSnakeOverlap";
 
 function gameLoop(snake, setSnake, food, setFood, direction, gridSize, resetSnake) {
     const tail = snake[snake.length - 1];
