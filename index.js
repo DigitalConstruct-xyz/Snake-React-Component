@@ -4,6 +4,7 @@ import useInterval from './Hooks/useInterval';
 import useSnakeDirection from './Hooks/useSnakeDirection';
 import game from "./Game";
 import generateFood from "./Game/generateFood";
+import autoplay from "./Game/autoplay";
 
 
 const SnakeGame = ({
@@ -23,7 +24,9 @@ const SnakeGame = ({
     const [direction, setDirection] = useSnakeDirection(initialDirection);
 
     useInterval(() => {
-        game(snake, setSnake, food, setFood, direction, gridSize,
+        const newDirection = autoplay(snake, food, direction);
+        setDirection(newDirection);
+        game(snake, setSnake, food, setFood, newDirection, gridSize,
             () => {
             setSnake(initialSnake)
             setDirection(initialDirection)
