@@ -7,21 +7,23 @@ const GridCell = ({ isSnake, isFood, coordinate, gridCellPixelSizeX = 15, gridCe
     // For example, to display the coordinates (for debugging):
     // const [x, y] = coordinate;
 
-    return (
-        <div
-            style={{
-                width: gridCellPixelSizeX + 'px',
-                height: gridCellPixelSizeY + 'px',
-                backgroundColor: isSnake ? snakeColor : isFood ? foodColor : backgroundColor,
-                border: '1px solid black',
-                // Uncomment below line to display coordinates in each cell
-                // fontSize: '10px', textAlign: 'center', lineHeight: '20px'
-            }}
-        >
-            {/* Uncomment below line to display coordinates in each cell */}
-            {/* {`${x},${y}`} */}
-        </div>
-    );
+  return (
+    <div
+      style={{
+        width: gridCellPixelSizeX + 'px',
+        height: gridCellPixelSizeY + 'px',
+        backgroundColor: isSnake ? snakeColor : isFood ? foodColor : backgroundColor,
+        fontSize: `${gridCellPixelSizeX}px`, // Set the font size to a percentage of the parent element's font size
+        textAlign: 'center',
+        textJustify: 'center',
+        lineHeight: '1'
+      }}
+    >
+      {/* Uncomment below line to display coordinates in each cell */}
+       {`${x}`}
+
+    </div>
+  );
 };
 
 export default GridCell;
