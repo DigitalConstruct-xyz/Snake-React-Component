@@ -58,13 +58,14 @@ function getNewDirection(snake, food, direction) {
 }
 
 // Update the direction according to snake and food
-function updateDirection(snake, food, direction) {
+function updateDirection(snake, food, direction, setDirection, event_) {
   if (isApproachingFood(snake, food, direction)) {
     // console.log("snake head", snake[snake.length - 1]);
     return direction;
   }
 
   const newDirection = getNewDirection(snake, food, direction);
+  setDirection(newDirection);
   return newDirection;
 }
 

@@ -20,7 +20,7 @@ const GridCell = ({ isSnake, isFood, coordinate, gridCellPixelSizeX = 15, gridCe
       }}
     >
       {/* Uncomment below line to display coordinates in each cell */}
-       {`${x}`}
+      {/* {`${x}`}*/}
 
     </div>
   );
