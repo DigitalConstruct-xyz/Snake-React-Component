@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Grid from './Components/Grid';
 import useInterval from './Hooks/useInterval';
 import useSnakeDirection from './Hooks/useSnakeDirection';
 import game from "./Game";
 import generateFood from "./Game/generateFood";
-import autoplay from "./Game/autoplay";
+import decisionMakerAutoplay from "./decisionMakerAutoplay";
+import decisionMakerHumanPlay from "./decisionMakerHumanPlay";
 
 
 const SnakeGame = ({
-                       msPerFrame = 600,
+                       msPerFrame = 100,
                        gridSize = [70, 6],
                        gridPixelSize = [8, 8],
                        gridCellPixelSize = [6,6],
@@ -17,16 +18,41 @@ const SnakeGame = ({
                        foodColor = 'red',
                         initialDirection = [1,0],
                         initialSnake = [[0, 0]],
+                        decisionMakerMachine =
+                            decisionMakerAutoplay
+                       ,
+                       decisionMakerHuman = decisionMakerHumanPlay,
+                        autoplay = true
                    }) => {
     const [snake, setSnake] = useState(initialSnake);
     const initialFood = generateFood(initialSnake, gridSize)
     const [food, setFood] = useState(initialFood);
     const [direction, setDirection] = useSnakeDirection(initialDirection);
 
+    useEffect(() => {
+
+        if(!autoplay) {
+            const eventListener = (event) => {
+                decisionMakerHuman(direction, setDirection, event)
+            }
+            window.addEventListener("keydown", eventListener)
+            return () => {
+                window.removeEventListener("keydown", eventListener)
+            }
+        }
+
+    }, []);
+
     useInterval(() => {
-        const newDirection = autoplay(snake, food, direction);
-        setDirection(newDirection);
-        game(snake, setSnake, food, setFood, newDirection, gridSize,
+        let newDirection =direction;
+        if(autoplay) {
+            newDirection = decisionMakerMachine(snake, food, direction, setDirection);
+        }
+        // setDirection(newDirection);
+
+        game(snake, setSnake, food, setFood,
+            newDirection
+            , gridSize,
             () => {
             setSnake(initialSnake)
             setDirection(initialDirection)

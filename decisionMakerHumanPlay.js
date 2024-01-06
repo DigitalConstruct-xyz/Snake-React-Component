@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 
 
-const DecisionMakerPlay = (direction, setDirection, event) => {
+const DecisionMakerHumanPlay = (direction, setDirection, event) => {
 
     const directions = {
         regular: {
@@ -38,4 +38,4 @@ const DecisionMakerPlay = (direction, setDirection, event) => {
 
 };
 
-export default DecisionMakerPlay;
+export default DecisionMakerHumanPlay;
