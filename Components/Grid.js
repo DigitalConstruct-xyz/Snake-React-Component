@@ -18,8 +18,6 @@ const Grid = ({ gridSize, snake, food,
                     <GridCell key={`${i}-${j}`} isSnake={isSnake} isFood={isFood} coordinate={[i,j]}
                         gridCellPixelSizeX={gridCellPixelSizeX} gridCellPixelSizeY={gridCellPixelSizeY
                     } backgroundColor={backgroundColor} snakeColor={snakeColor} foodColor={foodColor}
-
-
                     />
                 );
 
