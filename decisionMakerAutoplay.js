@@ -1,25 +1,13 @@
 
-// Calculate the distance between two points
-function calculateDistance(point1, point2) {
-  const xDistance = Math.abs(point1[0] - point2[0]);
-  const yDistance = Math.abs(point1[1] - point2[1]);
-  return xDistance + yDistance;
-}
-
-// Check if the snake is approaching the food
-function isApproachingFood(snake, food, direction) {
-  const snakeHead = snake[snake.length -1];
-  const nextSnakeHead = [
-    snakeHead[0] + direction[0],
-    snakeHead[1] + direction[1],
-  ];
-  const currentDistance = calculateDistance(snakeHead, food);
-  const nextDistance = calculateDistance(nextSnakeHead, food);
-  console.log(currentDistance, nextDistance)
-  return nextDistance < currentDistance;
-}
-
 // Get the new direction that is approaching and not the current direction
+
+import checkCollision from "./Helpers/checkCollision";
+
+
+function getDistance(p0, p1) {
+  // Calculate Euclidean distance
+  return Math.sqrt((p1[0] - p0[0]) ** 2 + (p1[1] - p0[1]) ** 2);
+}
 /**
  * Calculates the new direction for the snake in the game.
  * @param {Array<Array<number>>} snake - The current positions of the snake's body segments.
@@ -27,46 +15,44 @@ function isApproachingFood(snake, food, direction) {
  * @param {Array<number>} direction - The current direction of the snake.
  * @returns {Array<number>} - The new direction for the snake.
  */
-function getNewDirection(snake, food, direction) {
+
+
+function getNewDirection(snake, food, direction, setDirection) {
+
   const directions = [
     [0, -1], // Up
+    [1, -1],
     [1, 0], // Right
+    [1, 1],
     [0, 1], // Down
+    [-1, 1],
     [-1, 0], // Left
+    [-1, -1]
   ];
 
-  let bestDirection = direction;
-  let bestDistance = calculateDistance(snake[snake.length - 1], food);
+  let snakeHead = snake[snake.length - 1];
+  const distances = [];
 
-  for (const newDirection of directions) {
-    const nextSnakeHead = [
-      snake[snake.length - 1][0] + newDirection[0],
-      snake[snake.length - 1][1] + newDirection[1],
-    ];
-    const nextDistance = calculateDistance(nextSnakeHead, food);
-
-    if (
-      nextDistance <= bestDistance &&
-      (newDirection[0] !== -direction[0] || newDirection[1] !== -direction[1])
-    ) {
-      bestDirection = newDirection;
-      bestDistance = nextDistance;
+  for (let dir of directions) {
+    const newSnakeHead = [snakeHead[0] + dir[0], snakeHead[1] + dir[1]];
+    if (!(checkCollision(newSnakeHead, snake) || (dir[0] == -direction[0] && dir[1] == -direction[1]))) {
+      const distance = getDistance(newSnakeHead, food);
+      distances.push({ direction: dir, distance });
     }
   }
 
-  return bestDirection;
-}
+  distances.sort((a, b) => a.distance - b.distance);
 
-// Update the direction according to snake and food
-function updateDirection(snake, food, direction, setDirection, event_) {
-  if (isApproachingFood(snake, food, direction)) {
-    // console.log("snake head", snake[snake.length - 1]);
+  // The sorted directions by distance
+  const sortedDirections = distances.map((item) => item.direction);
+  console.log(sortedDirections)
+
+  if(sortedDirections.length === 0) {
     return direction;
   }
+  setDirection(sortedDirections[0])
 
-  const newDirection = getNewDirection(snake, food, direction);
-  setDirection(newDirection);
-  return newDirection;
-}
+  return sortedDirections[0];
+  }
 
-export default updateDirection;
+  export default getNewDirection;

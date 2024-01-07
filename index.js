@@ -41,12 +41,13 @@ const SnakeGame = ({
             }
         }
 
-    }, []);
+    });
 
     useInterval(() => {
         let newDirection =direction;
         if(autoplay) {
             newDirection = decisionMakerMachine(snake, food, direction, setDirection);
+            setDirection(newDirection);
         }
         // setDirection(newDirection);
 
