@@ -17,17 +17,20 @@ function getDistance(p0, p1) {
  */
 
 
-function getNewDirection(snake, food, direction, setDirection) {
+function getNewDirection(snake, food, direction, setDirection, gridSize) {
 
   const directions = [
     [0, -1], // Up
-    [1, -1],
+
     [1, 0], // Right
-    [1, 1],
+    
     [0, 1], // Down
-    [-1, 1],
+    
     [-1, 0], // Left
-    [-1, -1]
+    [-1, -1],
+    [1, -1],
+    [1, 1],
+    [-1, 1],
   ];
 
   let snakeHead = snake[snake.length - 1];
@@ -35,7 +38,9 @@ function getNewDirection(snake, food, direction, setDirection) {
 
   for (let dir of directions) {
     const newSnakeHead = [snakeHead[0] + dir[0], snakeHead[1] + dir[1]];
-    if (!(checkCollision(newSnakeHead, snake) || (dir[0] == -direction[0] && dir[1] == -direction[1]))) {
+    if (!(checkCollision(newSnakeHead, snake) || (dir[0] == -direction[0] && dir[1] == -direction[1]) 
+    || (newSnakeHead[0] < 0 || newSnakeHead[0] >= gridSize[0] || newSnakeHead[1] < 0 || newSnakeHead[1] >= gridSize[1])
+  )) {
       const distance = getDistance(newSnakeHead, food);
       distances.push({ direction: dir, distance });
     }
@@ -45,7 +50,7 @@ function getNewDirection(snake, food, direction, setDirection) {
 
   // The sorted directions by distance
   const sortedDirections = distances.map((item) => item.direction);
-  console.log(sortedDirections)
+  // console.log(sortedDirections)
 
   if(sortedDirections.length === 0) {
     return direction;

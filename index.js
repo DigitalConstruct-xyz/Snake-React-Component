@@ -9,8 +9,8 @@ import decisionMakerHumanPlay from "./decisionMakerHumanPlay";
 
 
 const SnakeGame = ({
-                       msPerFrame = 100,
-                       gridSize = [70, 6],
+                       msPerFrame = 500,
+                       gridSize = [10, 10],
                        gridPixelSize = [8, 8],
                        gridCellPixelSize = [6,6],
                        backgroundColor = 'black',
@@ -46,7 +46,7 @@ const SnakeGame = ({
     useInterval(() => {
         let newDirection =direction;
         if(autoplay) {
-            newDirection = decisionMakerMachine(snake, food, direction, setDirection);
+            newDirection = decisionMakerMachine(snake, food, direction, setDirection, gridSize);
             setDirection(newDirection);
         }
         // setDirection(newDirection);
